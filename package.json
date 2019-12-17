@@ -1,0 +1,14 @@
+{
+  "name": "Dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard for Ichika",
+  "main": "app.js",
+  "repository": "https://github.com/IchikaJS/Dashboard",
+  "author": "Dylan Ogle <delxhq@funo.network>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}
