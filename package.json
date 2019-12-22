@@ -3,12 +3,29 @@
   "version": "1.0.0",
   "description": "Dashboard for Ichika",
   "main": "app.js",
+  "scripts": {
+    "start": "npx babel-node src/app.js"
+  },
   "repository": "https://github.com/IchikaJS/Dashboard",
   "author": "Dylan Ogle <delxhq@funo.network>",
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "socket.io-client": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.0",
+    "@babel/node": "^7.7.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/runtime": "^7.7.1",
+    "@types/cheerio": "^0.22.13",
+    "@types/node": "^12.12.5",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
   }
 }

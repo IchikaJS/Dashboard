@@ -1,44 +1,30 @@
-const express = require('express')
-const fetch = require('node-fetch')
+import express from 'express'
+import path from 'path'
+import { Socket } from './util/socket'
+
 const app = express()
+const soc = new Socket()
 
-const CLIENT_ID = 641665395413090319
-const CLIENT_SECRET = process.env.OAUTH_SECRET
-const REDIRECT_URI = 'http://localhost:3000/oauth'
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 
-app.use(express.json())
+app.get('/', (req, res) => {
+  res.render('index')
+})
 
-app.get('/oauth', async (req, res) => {
-  let ACCESS_TOKEN = req.query.code
-
-  // await fetch('https://discordapp.com/api/oauth2/token', {
-  //   method: 'post',
-  //   body: JSON.stringify({
-  //     client_id: CLIENT_ID,
-  //     client_secret: CLIENT_SECRET,
-  //     grant_type: 'client_credentials',
-  //     code: ACCESS_TOKEN,
-  //     redirect_uri: REDIRECT_URI,
-  //     scope: 'guilds identify'
-  //   }),
-  //   headers: { 'Content-Type': 'application/json' },
-  // })
-  // .then(res => res.json())
-  // .then(json => console.log(json))
-
+// temporarily
+app.get('/user', (req, res) => {
   res.sendStatus(200)
-
-  console.log(req.query)
+  soc.fetchUser()
 })
 
-app.post('/test', (req, res) => {
-  console.log(req.body)
+app.get('/oauth', (req, res) => {
+  soc.handleCode(req.query.code, 'http://localhost:8000/oauth', 'guilds identify')
+  res.sendStatus(200)
 })
 
-app.get('/login', (req, res) => {
-  res.redirect('https://discordapp.com/api/oauth2/authorize?client_id=641665395413090319&response_type=token&scope=identify%20guilds')
+app.listen(8000, () => {
+  console.log('Listening on *:8000')
 })
 
-app.listen(3000, () => {
-  console.log('Listening on *:3000')
-})
+module.exports = express
